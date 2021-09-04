@@ -3,14 +3,15 @@
 <form action="{% url 'login' %}" method="POST">
     {% csrf_token %}
     Welcome to Treasure Hunt<br>
+    <p style="color:red">
+        {{msg}}<br>
+    </p>
     Username: <input type="text" name="username"><br>
     Password: <input type="text" name="password"><br>
     <input type="submit" name="Submit">
 </form>
 <br>
-<form action="{% url 'register' %}" method="POST">
-    {% csrf_token %}
-    <input type="submit" name="Register">
-</form>
+Not registered for the hunt? Register here:
+<button onclick="location.href = '/register'">Register</button>
 
 {% endblock %}

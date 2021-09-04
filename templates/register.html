@@ -1,4 +1,14 @@
 {% extends 'body.html' %}
 {% block content %}
-juan
+<form action="{% url 'process_registration' %}" method="POST">
+    {% csrf_token %}
+    Registration form for The Treasure Hunt<br>
+    All fields are compulsory<br>
+    Full Name: <input type="text" name="fullname"><br>
+    IISER email: <input type="text" name="iiserid"><br>
+    Username (max 10 characters): <input type="text" name="username"><br>
+    Set Password (max 10 characters): <input type="text" name="password"><br>
+    Confirm Password: <input type="text" name="cpassword"><br>
+    <input type="submit" name="Submit">
+</form>
 {% endblock %}
