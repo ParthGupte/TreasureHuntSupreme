@@ -1,5 +1,5 @@
 from django.http.response import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from thehunt.models import *
 # Create your views here.
 
@@ -11,7 +11,8 @@ def register(request):
     return render(request,'register.html')
 
 def process_registration(request):
-    return HttpResponseRedirect('')
+    #write code for processing the regustration
+    return redirect('home')
 def login(request):
     username = request.POST['username']
     password = request.POST['password']
