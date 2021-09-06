@@ -4,12 +4,16 @@
     {% csrf_token %}
     Registration form for The Treasure Hunt<br>
     Fields marked '*' are compulsory<br>
+    <p style="color:red">
+        {{msg}}<br>
+    </p>
     Team Mate 1 full name*: <input type="text" name="fullname"><br>
     Team Mate 2 full name (optional): <input type="text" name="fullname2"><br>
     IISER email (Team mate 1)*: <input type="text" name="iiserid"><br>
     Username (max 10 characters)*: <input type="text" name="username"><br>
     Set Password (max 10 characters)*: <input type="text" name="password"><br>
-    Confirm Password: <input type="text" name="cpassword"><br>
+    Confirm Password*: <input type="text" name="cpassword"><br>
     <input type="submit" name="Submit">
-</form>
+</form><br>
+<button onclick="location.href = '/'">Home</button>
 {% endblock %}

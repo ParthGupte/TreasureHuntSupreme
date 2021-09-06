@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'TreasureHuntSupreme.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'chatrooms',
+        'NAME': 'treasurehunt',
         'USER': 'root',
         'HOST': 'localhost',
         'PASSWORD': 'tiger'
