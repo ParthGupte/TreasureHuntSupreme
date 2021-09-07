@@ -1,4 +1,8 @@
 {% extends 'body.html' %}
 {% block content %}
-pablo
+<p style="color:red">
+    {{msg}}<br>
+</p>
+<button onclick="location.href = '/hunt'">Start Treasure Hunt</button><br>
+<button onclick="location.href = '/leaderboard'">Leaderboard</button>
 {% endblock %}

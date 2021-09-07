@@ -1,6 +1,6 @@
 {% extends 'body.html' %}
 {% block content %}
-<form action="{% url 'login' %}" method="POST">
+<form action="{% url 'login_view' %}" method="POST">
     {% csrf_token %}
     Welcome to Treasure Hunt<br>
     <p style="color:red">
