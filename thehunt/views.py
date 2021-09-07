@@ -3,11 +3,15 @@ from django.shortcuts import render, redirect
 from thehunt.models import *
 from django.utils import timezone
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 import datetime
 # Create your views here.
 
 def home(request):
-    return render(request,'login.html',{"msg":""})
+    if request.user.is_authenticated:
+        return render(request,'main.html')
+    else:
+        return render(request,'login.html',{"msg":""})
 
 def register(request):
 
@@ -18,8 +22,8 @@ def process_registration(request):
     Fullname2 = request.POST['fullname2'].lstrip().rstrip()
     Iiserid = request.POST['iiserid'].lstrip().rstrip()
     Username = request.POST['username'].lstrip().rstrip()
-    Password = request.POST['password']
-    Cpassword = request.POST['cpassword']
+    Password = str(request.POST['password'])
+    Cpassword = str(request.POST['cpassword'])
     if Password != Cpassword:
         return render(request,'register.html',{'msg':'Passwords do not match'})
     elif Fullname=='' or Iiserid=='' or Username=='' or Password=='':
@@ -27,6 +31,7 @@ def process_registration(request):
 
     else:
         b = Users.objects.create_user(fullname=Fullname,fullname2=Fullname2, iiserid=Iiserid, username=Username, password=Password)
+        b.save()
         return redirect('home')
 
 
@@ -42,17 +47,17 @@ def process_registration(request):
 #     user = Users.objects.filter(username=username).first()
 #     user.log = False
 
-def loginrequired(username):
+"""def loginrequired(username):
     user = Users.objects.filter(username=username).first()
     if user.log:
         pass
     else:
-        return redirect('home')
+        return redirect('home')"""
 
 
 def login_view(request):
-    username = request.POST['username']
-    password = request.POST['password']
+    username = str(request.POST['username'])
+    password = str(request.POST['password'])
 
     user = authenticate(username=username, password=password)
     if user is not None:
@@ -61,7 +66,7 @@ def login_view(request):
     else:
         return render(request, 'login.html',{"msg":"Incorrect Username or Password"})
 
-
+@login_required(login_url='/')
 def hunt(request):
     now = timezone.now()
     test_start = now #GlobalVariables.objects.get(pk=1).test_start
@@ -71,9 +76,12 @@ def hunt(request):
     elif test_start<now:
         return render(request,'main.html',{'msg':'Please wait for the Treasure hunt to start'})
 
+@login_required(login_url='/')
 def level(request):
-    return render(request,'lvl.html')
+    user = request.user
+    username = user.username
+    return render(request,'lvl.html',{'username':username})
 
-
+@login_required(login_url='/')
 def leaderboard(request):
     return render(request, 'leaderboard.html')
