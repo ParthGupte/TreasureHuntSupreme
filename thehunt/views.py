@@ -2,7 +2,7 @@ from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from thehunt.models import *
 from django.utils import timezone
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
 import datetime
 # Create your views here.
 
@@ -29,13 +29,18 @@ def process_registration(request):
         b = Users.objects.create_user(fullname=Fullname,fullname2=Fullname2, iiserid=Iiserid, username=Username, password=Password)
         return redirect('home')
 
-def login(username):
-    user = Users.objects.filter(username=username).first()
-    user.log = True
 
-def logout(username):
-    user = Users.objects.filter(username=username).first()
-    user.log = False
+# login method has been imported now. Usage: login(request, user)
+
+# def login(username):
+#     user = Users.objects.filter(username=username).first()
+#     user.log = True
+
+#logout method usage: logout(request)
+
+# def logout(username):
+#     user = Users.objects.filter(username=username).first()
+#     user.log = False
 
 def loginrequired(username):
     user = Users.objects.filter(username=username).first()
@@ -43,14 +48,15 @@ def loginrequired(username):
         pass
     else:
         return redirect('home')
-    
+
 
 def login_view(request):
     username = request.POST['username']
     password = request.POST['password']
-    
+
     user = authenticate(username=username, password=password)
     if user is not None:
+        login(request, user)
         return render(request,'main.html')
     else:
         return render(request, 'login.html',{"msg":"Incorrect Username or Password"})

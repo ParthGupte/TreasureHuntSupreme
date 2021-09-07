@@ -14,5 +14,3 @@ class Users(AbstractUser):
 class GlobalVariables(models.Model):
     test_start = models.DateTimeField()
     test_end = models.DateTimeField()
-    
-
