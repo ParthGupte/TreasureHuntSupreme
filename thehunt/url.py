@@ -9,5 +9,6 @@ urlpatterns = [
     path('hunt',views.hunt,name='hunt'),
     path('leaderboard',views.leaderboard,name='leaderboard'),
     path('level',views.level, name='level'),
-    path('checkans',views.checkans, name='checkans')
+    path('checkans',views.checkans, name='checkans'),
+    path('logout_view',views.logout_view, name='logout_view')
     ]

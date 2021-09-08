@@ -115,7 +115,11 @@ def checkans(request):
     else:
         return redirect('level')
 
-class table(TemplateView):
+def logout_view(request):
+    logout(request)
+    return redirect('home')
+
+'''class table(TemplateView):
       template_name = 'table.html'
 
       def get_context_data(self, **kwargs):
@@ -124,4 +128,4 @@ class table(TemplateView):
             ctx['rows'] = [{'id':1, 'chemblid':534988,'prefName':'A'},
                            {'id':2, 'chemblid':31290,'prefName':'B'},
                            {'id':3, 'chemblid':98765,'prefName':'C'}]
-            return ctx
+            return ctx'''
