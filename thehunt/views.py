@@ -9,7 +9,7 @@ import datetime
 
 def home(request):
     if request.user.is_authenticated:
-        return render(request,'main.html')
+        return render(request,'main.html',{'username':request.user.username})
     else:
         return render(request,'login.html',{"msg":""})
 
@@ -62,26 +62,66 @@ def login_view(request):
     user = authenticate(username=username, password=password)
     if user is not None:
         login(request, user)
-        return render(request,'main.html')
+        return render(request,'main.html',{'username':username})
     else:
         return render(request, 'login.html',{"msg":"Incorrect Username or Password"})
 
 @login_required(login_url='/')
 def hunt(request):
     now = timezone.now()
-    test_start = now #GlobalVariables.objects.get(pk=1).test_start
-    test_end = now+datetime.timedelta(seconds=9999999) #GlobalVariables.objects.get(pk=1).test_end
+    username = request.user.username
+    test_start = GlobalVariables.objects.get(pk=1).test_start
+    test_end = GlobalVariables.objects.get(pk=1).test_end
     if test_start<= now <= test_end:
         return redirect('level')
-    elif test_start<now:
+    elif test_start>now:
         return render(request,'main.html',{'msg':'Please wait for the Treasure hunt to start'})
+    else:
+        return render(request,'main.html',{'msg':'Treasure Hunt has already ended','username':username})
+
 
 @login_required(login_url='/')
 def level(request):
     user = request.user
     username = user.username
-    return render(request,'lvl.html',{'username':username})
+    lvl = user.lvl
+    questionobj = Questions.objects.filter(lvl=lvl).first() 
+    if questionobj is not None:
+        question = questionobj.question
+        return render(request,'lvl.html',{'username':username,'question':question})
+    else:
+        return redirect('leaderboard')
 
 @login_required(login_url='/')
 def leaderboard(request):
-    return render(request, 'leaderboard.html')
+    ranked_users = Users.objects.order_by('lvl', 'lastlvl_time').exclude(lvl=1)
+    n=0
+    D={}
+    for i in ranked_users:
+        D[str(n)] = i
+    return render(request, 'leaderboard.html',D)
+
+@login_required(login_url='/')
+def checkans(request):
+    user = request.user
+    lvl = user.lvl
+    ans = Questions.objects.get(lvl=lvl).modelanswer
+    user_answer = request.POST['answer']
+    if user_answer.lstrip().rstrip().lower()== ans.lstrip().rstrip().lower():
+        user.lvl = lvl+1
+        user.lastlvl_time = timezone.now()
+        user.save()
+        return redirect('level')
+    else:
+        return redirect('level')
+
+class table(TemplateView):
+      template_name = 'table.html'
+
+      def get_context_data(self, **kwargs):
+            ctx = super(table, self).get_context_data(**kwargs)
+            ctx['header'] = ['#', 'Username','Level','Last Level Time']
+            ctx['rows'] = [{'id':1, 'chemblid':534988,'prefName':'A'},
+                           {'id':2, 'chemblid':31290,'prefName':'B'},
+                           {'id':3, 'chemblid':98765,'prefName':'C'}]
+            return ctx

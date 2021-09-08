@@ -1,4 +1,14 @@
 {% extends 'body.html' %}
 {% block content %}
-{{username}}
+
+<form action="{% url 'checkans' %}" method="POST">
+    {% csrf_token %}
+{{question}}<br>
+<input type="text" name="answer">
+<input type="submit" name="Submit">
+</form>
+<br>
+<br>
+<button onclick="location.href = '/leaderboard'">Leaderboard</button>
+<button onclick="location.href = '/'">Home</button>
 {% endblock %}

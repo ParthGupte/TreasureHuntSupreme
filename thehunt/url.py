@@ -8,5 +8,6 @@ urlpatterns = [
     path('process_registration',views.process_registration,name="process_registration"),
     path('hunt',views.hunt,name='hunt'),
     path('leaderboard',views.leaderboard,name='leaderboard'),
-    path('level',views.level, name='level')
+    path('level',views.level, name='level'),
+    path('checkans',views.checkans, name='checkans')
     ]
