@@ -92,7 +92,7 @@ def level(request):
     questionobj = Questions.objects.filter(lvl=lvl).first() 
     if questionobj is not None:
         question = questionobj.question
-        return render(request,'lvl.html',{'username':username,'question':question})
+        return render(request,'lvl.html',{'username':username,'question':question,'lvl':lvl})
     else:
         return redirect('leaderboard')
 
