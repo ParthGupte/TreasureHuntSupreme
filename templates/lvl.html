@@ -1,14 +1,31 @@
-{% extends 'body.html' %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 
-<form action="{% url 'checkans' %}" method="POST">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="./styles/header.css">
+  <link rel="stylesheet" href="./styles/questions.css">
+  <title></title>
+</head>
+
+<body>
+  <header class="header">
+    <img src="./images/college_logo.png" alt="" class="img1">
+    <a href="index.html" class="title"><img src="./images/title.png"></a>
+    <img src="./images/club_logo.png" alt="" class="img2">
+  </header><br><br>
+  <div class="question-box">
+    {{question}}
+    <br>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png" alt=""
+      class="ques-img">
+  </div><br><br><br>
+  <form action="{% url 'checkans' %}" method="POST">
     {% csrf_token %}
-{{question}}<br>
-<input type="text" name="answer">
-<input type="submit" name="Submit">
-</form>
-<br>
-<br>
-<button onclick="location.href = '/leaderboard'">Leaderboard</button>
-<button onclick="location.href = '/'">Home</button>
-{% endblock %}
+    <input type="text" name="answer" value="" class="input-box" placeholder="Enter your answer here"><br><br><br><br>
+    <button type="submit" name="button" class="submit_button">SUBMIT</button><br>
+  </form>
+  <button onclick="location.href = '/leaderboard'">Leaderboard</button>
+</body>
+
+</html>

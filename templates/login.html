@@ -1,17 +1,38 @@
-{% extends 'body.html' %}
-{% block content %}
-<form action="{% url 'login_view' %}" method="POST">
-    {% csrf_token %}
-    Welcome to Treasure Hunt<br>
-    <p style="color:red">
-        {{msg}}<br>
-    </p>
-    Username: <input type="text" name="username"><br>
-    Password: <input type="text" name="password"><br>
-    <input type="submit" name="Submit">
-</form>
-<br>
-Not registered for the hunt? Register here:
-<button onclick="location.href = '/register'">Register</button>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 
-{% endblock %}
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel="stylesheet" href="./styles/header.css">
+  <link rel="stylesheet" href="./styles/index.css">
+
+<body>
+  <header class="header">
+    <img src="./images/college_logo.png" alt="" class="img1">
+    <a href="index.html" class="title"><img src="./images/title.png"></a>
+    <img src="./images/club_logo.png" alt="" class="img2">
+  </header><br><br>
+  <div class="login-page">
+    <div class="form">
+      <div class="login">
+        <div class="login-header">
+          <h3>LOGIN</h3>
+          <p style="color:red">
+            {{msg}}<br>
+          </p>
+          <p>Please enter your credentials to login.</p>
+        </div>
+      </div>
+      <form action="{% url 'login_view' %}" method="POST" class="login-form">
+          {% csrf_token %}
+        <input type="text" placeholder="username" name="username"/>
+        <input type="password" placeholder="password" name="password"/>
+        <button type="submit">login</button>
+        <p class="message">Not registered? <a onclick="location.href = '/register'" >Create an account</a></p>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>

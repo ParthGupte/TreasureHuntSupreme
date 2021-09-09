@@ -30,9 +30,13 @@ def process_registration(request):
         return render(request,'register.html',{'msg':'Mandatory fields cannot be empty'})
 
     else:
-        b = Users.objects.create_user(fullname=Fullname,fullname2=Fullname2, iiserid=Iiserid, username=Username, password=Password)
-        b.save()
-        return redirect('home')
+        try:
+            b = Users.objects.create_user(fullname=Fullname,fullname2=Fullname2, iiserid=Iiserid, username=Username, password=Password)
+            b.save()
+        except:
+            return render(request,'register.html',{'msg':'There was an error please try again or contact tech support'})
+        else:
+            return redirect('home')
 
 
 # login method has been imported now. Usage: login(request, user)

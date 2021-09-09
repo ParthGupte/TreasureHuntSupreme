@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractUser
 
 class Users(AbstractUser):
     fullname = models.CharField(max_length=50, unique=True, blank=False)
-    fullname2 = models.CharField(max_length=50, unique=True, blank=True)
+    fullname2 = models.CharField(max_length=50, blank=True)
     iiserid = models.CharField(blank=False, max_length=70)
     username = models.CharField(max_length=10, unique=True, blank=False)
     password = models.TextField(blank=False)
