@@ -25,7 +25,7 @@ SECRET_KEY = '7(_3x4s8r01t0qe-%@!8gckw&=q8a4v7yuull&e$yi$u(&3y2f'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'thehunt.Users'
 

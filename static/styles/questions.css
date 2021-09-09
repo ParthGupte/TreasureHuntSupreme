@@ -12,6 +12,9 @@ body{
   transition: 0.3s;
   border-radius: 5px;
   text-align: center;
+  color: darkgreen;
+  font-size: 14pt;
+  font-family: monospace;
 }
 
 .input-box{

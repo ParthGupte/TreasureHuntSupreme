@@ -16,8 +16,7 @@
     <img src="{% static './images/club_logo.png' %}" alt="" class="img2">
   </header><br><br><br><br><br>
   <div class="level-display">{{lvl}}</div>
-  <div class="question-box">
-    {{lvl}}<br>
+  <div class="question-box"><br>
     {{question}}
     <br>
     <img src="https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png" alt=""
@@ -27,8 +26,24 @@
     {% csrf_token %}
     <input type="text" name="answer" value="" class="input-box" placeholder="Enter your answer here"><br><br><br><br>
     <button type="submit" name="button" class="submit_button">SUBMIT</button><br>
+    
   </form>
-  <button onclick="location.href = '/leaderboard'" class="leaderboard-btn">Leaderboard</button>
+  <button onclick="location.href = '/leaderboard'" class="leaderboard-btn" style="margin-left: 680px;
+    margin-bottom: 150px;
+    background-color: green;
+    border-radius: 10px;
+    border: 4px double #cccccc;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    padding: 10px;
+    width: 150px;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+    cursor: pointer;">Leaderboard</button>
+ 
 </body>
 
 </html>
