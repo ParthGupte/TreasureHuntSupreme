@@ -1,0 +1,73 @@
+body{
+  background-color: bisque;
+  background-image: linear-gradient(to bottom right, red, yellow);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: green;
+  margin: 0;
+}
+
+.container-1{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.heading{
+  background-color: transparent;
+  border-top: 5px blue solid;
+  border-left: 5px blue solid;
+  border-right: 5px blue solid;
+  border-bottom: 5px blue solid;
+  color: orange;
+  font-size: 20pt;
+  font-weight: bold;
+  font-family: monospace;
+  border-radius: 15px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.box-1{
+  border-radius: 5px;
+  display: block;
+  margin : 0 auto;
+  height: 15px;
+  width: 30 blue
+  font-size: 14pt;
+  margin-left: 400px;
+  padding: 20px;
+  padding: 10px;
+  border: 2px solid #eee;
+  box-shadow:0 0 15px 4px rgba(5,0,0,0.06);
+}
+
+.input-box{
+  margin-right: auto;
+  color: yellow;
+  font-size: 16pt;
+  font-style: oblique;
+  font-family: fantasy;
+  width: 700px;
+  margin-left: auto;
+}
+
+.submit-button{
+  margin-left: 250px;
+  background-color: #7b38d8;
+  border-radius: 10px;
+  border: 4px double #cccccc;
+  color: #eeeeee;
+  text-align: center;
+  font-size: 20px;
+  padding: 10px;
+  width: 150px;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: green;
+}
