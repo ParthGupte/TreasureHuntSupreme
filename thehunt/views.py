@@ -103,11 +103,15 @@ def leaderboard(request):
 
 @login_required(login_url='/')
 def checkans(request):
+    now = timezone.now()
     user = request.user
     lvl = user.lvl
     ans = Questions.objects.get(lvl=lvl).modelanswer
     user_answer = request.POST['answer']
-    if user_answer.lstrip().rstrip().lower()== ans.lstrip().rstrip().lower():
+    end_time = GlobalVariables.objects.get(pk=1).test_end
+    if end_time<now:
+        return render(request,'leaderboard.html',{{'msg':'Time ended so your last answer was not recorded'}})
+    elif user_answer.lstrip().rstrip().lower()== ans.lstrip().rstrip().lower():
         user.lvl = lvl+1
         user.lastlvl_time = timezone.now()
         user.save()
@@ -129,3 +133,14 @@ def logout_view(request):
                            {'id':2, 'chemblid':31290,'prefName':'B'},
                            {'id':3, 'chemblid':98765,'prefName':'C'}]
             return ctx'''
+
+def changepswd(request):
+    email = request.POST['iiserid']
+    password = request.Post['password']
+    try:
+        user = Users.objects.get(iiserid=email)
+    except:
+        return render(request,'changepswd.html',{'msg':"Email id doesn't exist"})
+    else:
+        user.set_password(password)
+        return render(request,'changepswd.html',{'msg':'Password changed'})

@@ -1,0 +1,10 @@
+{% extends 'body.html' %}
+{% block content %}
+<form action="{% 'changepswd' %}" method="POST">
+    {% csrf_token %}
+    {{msg}}<br>
+Email: <input type="text" name="iiserid"><br>
+New Password: <input type="password" name="password"><br>
+<input type="submit" name='Submit'>
+</form>
+{% endblock %}

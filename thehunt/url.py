@@ -10,5 +10,6 @@ urlpatterns = [
     path('leaderboard',views.leaderboard,name='leaderboard'),
     path('level',views.level, name='level'),
     path('checkans',views.checkans, name='checkans'),
-    path('logout_view',views.logout_view, name='logout_view')
+    path('logout_view',views.logout_view, name='logout_view'),
+    path('changepswd',views.changepswd, name='changepswd')
     ]
