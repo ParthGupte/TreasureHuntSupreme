@@ -1,0 +1,12 @@
+{% extends 'body.html' %}
+{% block content %}
+Leaderboard<br>
+{% for user in ranked_users %}
+{{user}}<br>
+{% endfor %}
+<br>
+<br>
+<button onclick="location.href = '/level'">Back to The Hunt</button>
+<br>
+<button onclick="location.href = '/'">Home</button>
+{% endblock %}
