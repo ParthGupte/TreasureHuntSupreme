@@ -1,40 +1,45 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en" dir="ltr">
 
 <head>
   <meta charset="utf-8">
   <title>register</title>
-  <link rel="stylesheet" href="./styles/header.css">
-  <link rel="stylesheet" href="./styles/style.css">
+  <link rel="stylesheet" href="{% static './styles/header.css' %}">
+  <link rel="stylesheet" href="{% static './styles/style.css' %}">
 </head>
 
 <body>
   <header class="header">
-    <img src="./images/college_logo.png" alt="" class="img1">
-    <a href="index.html" class="title"><img src="./images/title.png"></a>
-    <img src="./images/club_logo.png" alt="" class="img2">
+    <img src="{% static './images/college_logo.png' %}" alt="" class="img1">
+    <a href="index.html" class="title"><img src="{% static './images/title.png' %}"></a>
+    <img src="{% static './images/club_logo.png' %}" alt="" class="img2">
   </header><br><br>
-  <div class="container-1">
-    <div class="heading">
-      Registration form for The Treasure Hunt.<br>
-      Fields marked * are compulsary.
-    </div><br><br><br>
-    <div class="input-box">
-      <form action="{% url 'process_registration' %}" method="POST">
-        {% csrf_token %}
-        Team Mate 1 full name *: <input type="text" class="box-1" placeholder="Name 1" name="fullname"><br>
-        Team Mate 2 full name: <input type="text" class="box-1" placeholder="Name 2" name="fullname2"><br>
-        IISER Email *: <input type="text" class="box-1" placeholder="Email" name="iiserid"><br>
-        Username (max 10 characters) *: <input type="text" class="box-1" placeholder="Set Username" name="username"><br>
-        Set Password (max 10 characters) *: <input type="password" class="box-1" placeholder="Type Password" name="password"><br>
-        Confirm Password *: <input type="password" class="box-1" placeholder="Reenter password" name="cpassword"><br><br><br>
-        <button type="submit" name="button" class="submit-button">SUBMIT</button>
-      </form>
-      <br>
-      <button onclick="location.href = '/'">Home</button>
-      <p style="color: crimson;">{{msg}}</p>
+  <table class="table">
+    <div class="container-1">
+      <div class="heading">
+        Registration form for The Treasure Hunt.<br>
+        Fields marked * are compulsary.
+      </div><br><br><br>
+      <div class="input-box">
+        <form action="{% url 'process_registration' %}" method="POST">
+          {% csrf_token %}
+          Team Mate 1 full name *: <input type="text" class="box-1" placeholder="Name 1" name="fullname"><br>
+          Team Mate 2 full name: <input type="text" class="box-1" placeholder="Name 2" name="fullname2"><br>
+          IISER Email *: <input type="text" class="box-1" placeholder="Email" name="iiserid"><br>
+          Username (max 10 characters) *: <input type="text" class="box-1" placeholder="Set Username"
+            name="username"><br>
+          Set Password (max 10 characters) *: <input type="password" class="box-1" placeholder="Type Password"
+            name="password"><br>
+          Confirm Password *: <input type="password" class="box-1" placeholder="Reenter password"
+            name="cpassword"><br><br><br>
+          <button type="submit" name="button" class="submit-button">SUBMIT</button>
+        </form>
+        <br>
+        <button onclick="location.href = '/'">Home</button>
+        <p style="color: crimson;">{{msg}}</p>
+      </div>
     </div>
-  </div>
 </body>
 
 </html>
