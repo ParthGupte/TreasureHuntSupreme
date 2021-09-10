@@ -80,10 +80,10 @@ WSGI_APPLICATION = 'TreasureHuntSupreme.wsgi.application'
 DATABASES = {
    'default': {
        'ENGINE': 'django.db.backends.postgresql',
-       'NAME': 'treasurehunt',
-       'USER': 'postgres',
-       'PASSWORD': 'tiger',
-       'HOST': 'localhost',
+       'NAME': 'ddv062u56v390k',
+       'USER': 'xfvpjcfkbclgxi',
+       'PASSWORD': 'f47625ccf3ba7767e1166ff1ceb142999713c30f7c01aae9e6c1c6136fdf0215',
+       'HOST': 'ec2-54-156-24-159.compute-1.amazonaws.com',
        'PORT': '5432',
    }
 }
