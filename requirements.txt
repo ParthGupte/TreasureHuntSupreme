@@ -70,4 +70,4 @@ urllib3==1.26.3
 whitenoise==5.2.0
 wrapt==1.12.1
 zope.interface==5.4.0
---upgrade pip setuptools wheel
+setuptools wheel
