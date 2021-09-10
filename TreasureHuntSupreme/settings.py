@@ -78,13 +78,14 @@ WSGI_APPLICATION = 'TreasureHuntSupreme.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'treasurehunt',
-        'USER': 'root',
-        'HOST': 'localhost',
-        'PASSWORD': 'tiger'
-    }
+   'default': {
+       'ENGINE': 'django.db.backends.postgresql',
+       'NAME': 'treasurehunt',
+       'USER': 'postgres',
+       'PASSWORD': 'tiger',
+       'HOST': 'localhost',
+       'PORT': '5432',
+   }
 }
 
 # Password validation

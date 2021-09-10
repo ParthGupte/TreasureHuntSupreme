@@ -134,13 +134,13 @@ def logout_view(request):
                            {'id':3, 'chemblid':98765,'prefName':'C'}]
             return ctx'''
 
-def changepswd(request):
-    email = request.POST['iiserid']
-    password = request.Post['password']
-    try:
-        user = Users.objects.get(iiserid=email)
-    except:
-        return render(request,'changepswd.html',{'msg':"Email id doesn't exist"})
-    else:
-        user.set_password(password)
-        return render(request,'changepswd.html',{'msg':'Password changed'})
+#def changepswd(request):
+#    email = request.POST['iiserid']
+#    password = request.Post['password']
+#    try:
+#        user = Users.objects.get(iiserid=email)
+#    except:
+#        return render(request,'changepswd.html',{'msg':"Email id doesn't exist"})
+#    else:
+#        user.set_password(password)
+#        return render(request,'changepswd.html',{'msg':'Password changed'})
