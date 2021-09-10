@@ -98,8 +98,14 @@ def level(request):
 
 @login_required(login_url='/')
 def leaderboard(request):
-    ranked_users = Users.objects.order_by('-lvl', 'lastlvl_time').exclude(lvl=1)
-    return render(request, 'leaderboard.html',{'ranked_users':ranked_users})
+    now = timezone.now()
+    test_start = GlobalVariables.objects.get(pk=1).test_start
+    if test_start<= now:
+        ranked_users = Users.objects.order_by('-lvl', 'lastlvl_time').exclude(lvl=1)
+        return render(request, 'leaderboard.html',{'ranked_users':ranked_users})
+    else:
+        return redirect('home')
+
 
 @login_required(login_url='/')
 def checkans(request):
