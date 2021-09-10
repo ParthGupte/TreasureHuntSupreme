@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'TreasureHuntSupreme.wsgi.application'
 
 DATABASES = {
    'default': {
-       'ENGINE': 'django.db.backends.postgresql',
+       'ENGINE': 'django.db.backends.postgresql_psycopg2',
        'NAME': 'ddv062u56v390k',
        'USER': 'xfvpjcfkbclgxi',
        'PASSWORD': 'f47625ccf3ba7767e1166ff1ceb142999713c30f7c01aae9e6c1c6136fdf0215',
