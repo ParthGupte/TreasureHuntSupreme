@@ -19,9 +19,8 @@
       </header><br><br><br><br><br>
       {{msg}}<br>
     {% for user in ranked_users %}
-        {{user}}<br>
+          <h6 class="username">{{user.username}}</h6> <h6 class="lvl">{{user.lvl}}</h6> <h6 class="time">{{user.lastlvl_time}}</h6><br>
     {% endfor %}
-
     <br>
     <button onclick="location.href = '/level'">Back to The Hunt</button>
     <br>

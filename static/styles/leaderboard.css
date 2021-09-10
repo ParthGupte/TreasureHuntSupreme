@@ -4,3 +4,23 @@ body{
     height: 750px;
 }
 
+.username{
+    text-align: center;
+    color: aliceblue;
+    size: 15pt;
+    margin-left: 400px;
+}
+
+.lvl{
+    text-align: center;
+    color: aliceblue;
+    size: 15pt;
+    margin-left: 600px;
+}
+    
+.time{
+    text-align: center;
+    color: aliceblue;
+    size: 15pt;
+    margin-left: 800px;
+}
