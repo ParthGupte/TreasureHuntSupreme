@@ -77,16 +77,14 @@ WSGI_APPLICATION = 'TreasureHuntSupreme.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+
 DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.postgresql_psycopg2',
-       'NAME': 'ddv062u56v390k',
-       'USER': 'xfvpjcfkbclgxi',
-       'PASSWORD': 'f47625ccf3ba7767e1166ff1ceb142999713c30f7c01aae9e6c1c6136fdf0215',
-       'HOST': 'ec2-54-156-24-159.compute-1.amazonaws.com',
-       'PORT': '5432',
-   }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3'
+    }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
