@@ -1,1 +1,1 @@
-web:gunicorn TreasureHuntSupreme.wsgi
+web: gunicorn TreasureHuntSupreme.wsgi
