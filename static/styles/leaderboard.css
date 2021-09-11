@@ -1,5 +1,5 @@
 body{
-    background-image: linear-gradient(to bottom right, red, yellow);
+    background-color: orange;
     background-repeat: no-repeat;
     height: 750px;
 }
