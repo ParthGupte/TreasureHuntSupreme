@@ -19,7 +19,7 @@
   <div class="question-box"><br>
     {{question}}
     <br>
-    <img src="{{question.imgpath}}" alt="" class="ques-img">
+    <img src="{{questionobj.imgpath}}" alt="" class="ques-img">
   </div><br><br><br>
   <form action="{% url 'checkans' %}" method="POST">
     {% csrf_token %}
@@ -41,8 +41,8 @@
     -moz-transition: all 0.5s;
     -o-transition: all 0.5s;
     transition: all 0.5s;
-    cursor: pointer;">Leaderboard</button>
-
+    cursor: pointer;">Leaderboard</button><br><br><br><br>
+<a href="https://www.facebook.com/pages/category/Not-a-Business/Omkaruthhsav.mythologyhunt/photos/">Facebook page for hints</a>
 </body>
 
 </html>
