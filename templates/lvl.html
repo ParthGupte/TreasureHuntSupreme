@@ -1,4 +1,5 @@
 <!DOCTYPE html> {% load static%}
+{% static 'images' as base_url %}
 <html lang="en" dir="ltr">
 
 <head>
@@ -19,14 +20,13 @@
   <div class="question-box"><br>
     {{question}}
     <br>
-    <img src={{imgpath}} alt=""
-      class="ques-img">
+    <img src="{{base_url}}/{{question.imgpath}}" alt="A beach image" class="ques_img">
   </div><br><br><br>
   <form action="{% url 'checkans' %}" method="POST">
     {% csrf_token %}
     <input type="text" name="answer" value="" class="input-box" placeholder="Enter your answer here"><br><br><br><br>
     <button type="submit" name="button" class="submit_button">SUBMIT</button><br>
-    
+
   </form>
   <button onclick="location.href = '/leaderboard'" class="leaderboard-btn" style="margin-left: 680px;
     margin-bottom: 150px;
@@ -43,7 +43,7 @@
     -o-transition: all 0.5s;
     transition: all 0.5s;
     cursor: pointer;">Leaderboard</button>
- 
+
 </body>
 
 </html>
