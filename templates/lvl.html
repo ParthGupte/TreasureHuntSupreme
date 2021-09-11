@@ -19,8 +19,7 @@
   <div class="question-box"><br>
     {{question}}
     <br>
-    <!-- <img src="{{question.imgpath}}" alt="" class="ques-img"> -->
-    <div class="ques-img" style="background-image: url(/{{question.imgpath}});"></div>
+    <img src="{{question.imgpath}}" alt="" class="ques-img">
   </div><br><br><br>
   <form action="{% url 'checkans' %}" method="POST">
     {% csrf_token %}
