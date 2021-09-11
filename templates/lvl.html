@@ -1,5 +1,4 @@
 <!DOCTYPE html> {% load static%}
-{% static 'images' as base_url %}
 <html lang="en" dir="ltr">
 
 <head>
@@ -20,8 +19,8 @@
   <div class="question-box"><br>
     {{question}}
     <br>
-    <img src="{{question.imgpath}}" alt=""
-      class="ques-img">
+    <!-- <img src="{{question.imgpath}}" alt="" class="ques-img"> -->
+    <div class="ques-img" style="background-image: url(/{{question.imgpath}});"></div>
   </div><br><br><br>
   <form action="{% url 'checkans' %}" method="POST">
     {% csrf_token %}
