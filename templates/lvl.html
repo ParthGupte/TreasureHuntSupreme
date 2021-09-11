@@ -20,7 +20,8 @@
   <div class="question-box"><br>
     {{question}}
     <br>
-    <img src="{{base_url}}/{{question.imgpath}}" alt="A beach image" class="ques_img">
+    <img src="{{question.imgpath}}" alt=""
+      class="ques-img">
   </div><br><br><br>
   <form action="{% url 'checkans' %}" method="POST">
     {% csrf_token %}

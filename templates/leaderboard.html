@@ -18,10 +18,28 @@
         <img src="{% static './images/club_logo.png' %}" alt="" class="img2">
       </header><br><br><br><br><br>
       {{msg}}<br>
-    {% for user in ranked_users %}
-          <h6 class="username">{{user.username}}</h6> <h6 class="lvl">{{user.lvl}}</h6> <h6 class="time">{{user.lastlvl_time}}</h6><br>
-    {% endfor %}
-    <br>
+      <table class="table-c">
+        <!-- <thead>
+            <tr>
+                {% for k in header %}
+                <th>{{k}}</th>
+                {% endfor %}
+            </tr>
+        </thead> -->
+        <th>username</th>
+        <th>level</th>
+        <th>time completed</th>
+        <tbody>
+            {% for user in ranked_users %}
+                <tr>
+                    <td>{{user.username}}</td>
+                    <td>{{user.lvl}}</td>
+                    <td>{{user.lastlvl_time}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
     <button onclick="location.href = '/level'">Back to The Hunt</button>
     <br>
     <button onclick="location.href = '/'">Home</button>

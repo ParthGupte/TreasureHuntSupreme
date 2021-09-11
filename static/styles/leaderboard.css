@@ -4,23 +4,12 @@ body{
     height: 750px;
 }
 
-.username{
-    text-align: center;
-    color: aliceblue;
-    size: 15pt;
-    margin-left: 400px;
-}
-
-.lvl{
-    text-align: center;
-    color: aliceblue;
-    size: 15pt;
-    margin-left: 600px;
-}
-    
-.time{
-    text-align: center;
-    color: aliceblue;
-    size: 15pt;
-    margin-left: 800px;
+.table-c{
+    margin-left: auto;
+    margin-right: auto;
+    color: lavenderblush;
+    font-size: 20pt;
+    font-weight: bold;
+    font-family: sans-serif;
+    padding-left: 10px;
 }
