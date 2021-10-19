@@ -125,6 +125,7 @@ def checkans(request):
     else:
         return redirect('level')
 
+
 def logout_view(request):
     logout(request)
     return redirect('home')
