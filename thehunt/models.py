@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db.models.fields.related import ForeignKey
+import datetime
 # Create your models here.
 
 class Users(AbstractUser):
@@ -11,12 +12,12 @@ class Users(AbstractUser):
     password = models.TextField(blank=False)
     log = models.BooleanField(default=False)
     lvl = models.IntegerField(default=1)
-    lastlvl_time = models.DateTimeField(default='2021-09-08 00:00:00')
+    begin_time = models.DateTimeField(default='2021-09-08 00:00:00')
 
 class GlobalVariables(models.Model):
     test_start = models.DateTimeField()
     test_end = models.DateTimeField()
-    test_dur = models.DurationField()
+    test_dur = models.DurationField(default=datetime.timedelta())
 
 class Questions(models.Model):
     lvl = models.IntegerField(primary_key=True)
@@ -27,4 +28,4 @@ class Questions(models.Model):
 class Answers(models.Model):
     username = models.ForeignKey(Users, on_delete=models.CASCADE)
     lvl = models.ForeignKey(Questions, on_delete=models.CASCADE)
-    ans = models.TextField()
+    ans = models.TextField(default="")

@@ -11,5 +11,7 @@ urlpatterns = [
     path('level',views.level, name='level'),
     path('checkans',views.checkans, name='checkans'),
     path('logout_view',views.logout_view, name='logout_view'),
+    path('next',views.next,name='next'),
+    path('prev',views.prev,name='prev'),
    # path('changepswd',views.changepswd, name='changepswd')
     ]

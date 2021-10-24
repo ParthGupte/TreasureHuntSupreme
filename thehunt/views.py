@@ -19,7 +19,6 @@ def register(request):
 
 def process_registration(request):
     Fullname = request.POST['fullname'].lstrip().rstrip()
-    Fullname2 = request.POST['fullname2'].lstrip().rstrip()
     Iiserid = request.POST['iiserid'].lstrip().rstrip()
     Username = request.POST['username'].lstrip().rstrip()
     Password = str(request.POST['password'])
@@ -31,7 +30,7 @@ def process_registration(request):
 
     else:
         try:
-            b = Users.objects.create_user(fullname=Fullname,fullname2=Fullname2, iiserid=Iiserid, username=Username, password=Password)
+            b = Users.objects.create_user(fullname=Fullname, iiserid=Iiserid, username=Username, password=Password)
             b.save()
         except:
             return render(request,'register.html',{'msg':'There was an error please try again or contact tech support'})
@@ -77,6 +76,9 @@ def hunt(request):
     test_start = GlobalVariables.objects.get(pk=1).test_start
     test_end = GlobalVariables.objects.get(pk=1).test_end
     if test_start<= now <= test_end:
+        user = request.user
+        user.begin_time = now
+        user.save()
         return redirect('level')
     elif test_start>now:
         return render(request,'main.html',{'msg':'Please wait for the Treasure hunt to start'})
@@ -90,11 +92,31 @@ def level(request):
     username = user.username
     lvl = user.lvl
     questionobj = Questions.objects.filter(lvl=lvl).first() 
+    ansobj = Answers.objects.filter(lvl=lvl).first()
     if questionobj is not None:
-        question = questionobj.question
-        return render(request,'lvl.html',{'username':username,'question':question,'lvl':lvl,'questionobj':questionobj})
+        if ansobj is not None:
+            ansplaceholder = ansobj.ans
+        else:
+            ansplaceholder = "Enter your answer"
+        return render(request,'lvl.html',{'username':username,'lvl':lvl,'questionobj':questionobj,'placeholder':ansplaceholder})
     else:
         return redirect('leaderboard')
+
+@login_required(login_url='/')
+def next(request):
+    user = request.user
+    user.lvl += 1
+    user.save()
+    return redirect('level')
+
+@login_required(login_url='/')
+def prev(request):
+    user = request.user
+    user.lvl -= 1
+    if user.lvl<1:
+        user.lvl = 1
+    user.save()
+    return redirect('level')
 
 @login_required(login_url='/')
 def leaderboard(request):
@@ -112,17 +134,19 @@ def checkans(request):
     now = timezone.now()
     user = request.user
     lvl = user.lvl
-    ans = Questions.objects.get(lvl=lvl).modelanswer
     user_answer = request.POST['answer']
+    begin_time = user.begin_time
+    start_time = GlobalVariables.objects.get(pk=1).test_start
     end_time = GlobalVariables.objects.get(pk=1).test_end
-    if end_time<now:
+    max_dur = GlobalVariables.objects.get(pk=1).test_dur
+    max_time = begin_time+max_dur
+    if end_time<now or begin_time+max_dur<now:
         return render(request,'leaderboard.html',{{'msg':'Time ended so your last answer was not recorded'}})
-    elif user_answer.lstrip().rstrip().lower()== ans.lstrip().rstrip().lower():
-        user.lvl = lvl+1
-        user.lastlvl_time = timezone.now()
-        user.save()
-        return redirect('level')
     else:
+        quesinst = Questions.objects.get(lvl=lvl)
+        ansobj = Answers.objects.get_or_create(username = user, lvl = quesinst)
+        ansobj.ans = user_answer #start here
+        ansobj.save()
         return redirect('level')
 
 

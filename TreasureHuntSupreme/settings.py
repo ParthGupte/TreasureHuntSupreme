@@ -80,12 +80,12 @@ WSGI_APPLICATION = 'TreasureHuntSupreme.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ddv062u56v390k',
-        'USER': 'xfvpjcfkbclgxi',
-        'HOST': 'ec2-54-156-24-159.compute-1.amazonaws.com',
-        'PORT':'5432',
-        'PASSWORD':'f47625ccf3ba7767e1166ff1ceb142999713c30f7c01aae9e6c1c6136fdf0215',
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'sqlite3.db',                      # Or path to database file if using sqlite3.
+        'USER': '',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
 
     }
 }
