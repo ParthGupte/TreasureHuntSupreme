@@ -11,7 +11,7 @@ def home(request):
     if request.user.is_authenticated:
         return render(request,'main.html',{'username':request.user.username})
     else:
-        return render(request,'login.html',{"msg":""})
+        return render(request,'glogin.html',{"msg":""})
 
 def register(request):
 

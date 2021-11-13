@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="google-signin-client_id" content="192119669445-nasv0fmhk37edplka3q6lc0373r69qqs.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <title></title>
+  <link rel="stylesheet" href="{% static './styles/header.css' %}">
+  <link rel="stylesheet" href="{% static './styles/index.css' %}">
+
+<body>
+  <header class="header">
+    <img src="{% static './images/college_logo.png' %}" alt="" class="img1">
+    <a onclick="location.href = '/'" class="title"><img src="{% static './images/title.png' %}"></a>
+    <img src="{% static './images/club_logo.png' %}" alt="" class="img2">
+  </header><br><br>
+  <table class="table">
+    <div class="login-page">
+      <div class="form">
+        <div class="login">
+          <div class="login-header">
+            <h3>LOGIN</h3>
+            <p style="color:red">
+              {{msg}}<br>
+            </p>
+            <p>Please enter your credentials to login.</p>
+          </div>
+        </div>
+        
+        <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark">
+            <script>
+                function onSignIn(googleUser) {
+                  // Useful data for your client-side scripts:
+                  var profile = googleUser.getBasicProfile();
+                  console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+                  console.log('Full Name: ' + profile.getName());
+                  console.log('Given Name: ' + profile.getGivenName());
+                  console.log('Family Name: ' + profile.getFamilyName());
+                  console.log("Image URL: " + profile.getImageUrl());
+                  console.log("Email: " + profile.getEmail());
+          
+                  // The ID token you need to pass to your backend:
+                  var id_token = googleUser.getAuthResponse().id_token;
+                  console.log("ID Token: " + id_token);
+                }
+            </script>
+        </div>
+      </div>
+    </div>
+</body>
+
+</html>
