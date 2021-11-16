@@ -92,7 +92,7 @@ def level(request):
     username = user.username
     lvl = user.lvl
     questionobj = Questions.objects.filter(lvl=lvl).first() 
-    ansobj = Answers.objects.filter(lvl=lvl).first()
+    ansobj = Answers.objects.filter(username=user, lvl=lvl).first()
     if questionobj is not None:
         if ansobj is not None:
             ansplaceholder = ansobj.ans
@@ -144,7 +144,7 @@ def checkans(request):
         return render(request,'leaderboard.html',{{'msg':'Time ended so your last answer was not recorded'}})
     else:
         quesinst = Questions.objects.get(lvl=lvl)
-        ansobj = Answers.objects.get_or_create(username = user, lvl = quesinst)
+        ansobj, created = Answers.objects.get_or_create(username = user, lvl = quesinst)
         ansobj.ans = user_answer #start here
         ansobj.save()
         return redirect('level')
