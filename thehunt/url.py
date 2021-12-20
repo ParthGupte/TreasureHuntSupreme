@@ -11,5 +11,6 @@ urlpatterns = [
     path('level',views.level, name='level'),
     path('checkans',views.checkans, name='checkans'),
     path('logout_view',views.logout_view, name='logout_view'),
+    path('activate-user/<uidb64>/<token>',views.activate_user,name='activate')
    # path('changepswd',views.changepswd, name='changepswd')
     ]

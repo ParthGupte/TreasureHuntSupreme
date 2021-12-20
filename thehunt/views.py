@@ -1,17 +1,29 @@
+from django.contrib.auth.models import User
+from django.core.checks import messages
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from thehunt.models import *
 from django.utils import timezone
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_decode,urlsafe_base64_encode
+from django.utils.encoding import force_bytes, force_str, force_text, DjangoUnicodeDecodeError
+from .utils import generate_token
+from django.core.mail import EmailMessage
+from django.conf import settings
 import datetime
 # Create your views here.
 
 def home(request):
     if request.user.is_authenticated:
-        return render(request,'main.html',{'username':request.user.username})
+        if request.user.email_is_verified:
+            return render(request,'main.html',{'username':request.user.username})
+        else:
+            return render(request,'login.html',{"msg":"Your email is not verified yet, please check your email."})
     else:
-        return render(request,'glogin.html',{"msg":""})
+        return render(request,'login.html',{"msg":""})
 
 def register(request):
 
@@ -19,7 +31,7 @@ def register(request):
 
 def process_registration(request):
     Fullname = request.POST['fullname'].lstrip().rstrip()
-    Fullname2 = request.POST['fullname2'].lstrip().rstrip()
+    # Fullname2 = request.POST['fullname2'].lstrip().rstrip()
     Iiserid = request.POST['iiserid'].lstrip().rstrip()
     Username = request.POST['username'].lstrip().rstrip()
     Password = str(request.POST['password'])
@@ -31,8 +43,9 @@ def process_registration(request):
 
     else:
         try:
-            b = Users.objects.create_user(fullname=Fullname,fullname2=Fullname2, iiserid=Iiserid, username=Username, password=Password)
+            b = Users.objects.create_user(fullname=Fullname, iiserid=Iiserid, username=Username, password=Password)
             b.save()
+            send_email(b, request)
         except:
             return render(request,'register.html',{'msg':'There was an error please try again or contact tech support'})
         else:
@@ -150,3 +163,31 @@ def logout_view(request):
 #    else:
 #        user.set_password(password)
 #        return render(request,'changepswd.html',{'msg':'Password changed'})
+
+def send_email(user, request):
+    current_site = get_current_site(request)
+    email_subject = 'Activate Conquestar account'
+    email_body = render_to_string('activate.html',{
+        'user':user, 
+        'domain':current_site, 
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': generate_token.make_token(user)
+        })
+    
+    email = EmailMessage(subject=email_subject,body=email_body,from_email=settings.EMAIL_FROM_USER,to=[user.iiserid])
+    email.send()
+
+def activate_user(request,uidb64,token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except Exception as e:
+        user = None
+    
+    if user and generate_token.check_token(user,token):
+        user.email_is_verified = True
+        user.save()
+        messages.add_message(request,messages.SUCCESS,'Email verified, you can proceed to login')
+        return redirect('home')
+    return render(request,'activate-failed.html',{'user',user})
+

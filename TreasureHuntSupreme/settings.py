@@ -123,6 +123,14 @@ USE_L10N = True
 
 USE_TZ = True
 
+# EMAIL CONFIG
+
+EMAIL_FROM_USER = os.environ.get('EMAIL_FROM_USER')
+EMAIL_HOST =  "smtp.gmail.com" #os.environ.get('EMAIL_HOST')
+EMAIL_HOST_USER = "emailbot665@gmail.com" #os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = "emailbot@314" #os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = True #os.environ.get('EMAIL_USE_TLS')
+EMAIL_PORT = 587 #os.environ.get('EMAIL_PORT')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/

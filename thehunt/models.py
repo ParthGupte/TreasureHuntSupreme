@@ -5,12 +5,13 @@ from django.contrib.auth.models import AbstractUser
 class Users(AbstractUser):
     fullname = models.CharField(max_length=50, unique=True, blank=False)
     #fullname2 = models.CharField(max_length=50, blank=True)
-    iiserid = models.CharField(blank=False, max_length=70)
+    iiserid = models.EmailField(blank=False, max_length=70)
     username = models.CharField(max_length=10, unique=True, blank=False)
     password = models.TextField(blank=False)
     log = models.BooleanField(default=False)
     lvl = models.IntegerField(default=1)
     lastlvl_time = models.DateTimeField(default='2021-09-08 00:00:00')
+    email_is_verified = models.BooleanField(default=False)
 
 class GlobalVariables(models.Model):
     test_start = models.DateTimeField()
