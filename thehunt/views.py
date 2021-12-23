@@ -78,8 +78,11 @@ def login_view(request):
 
     user = authenticate(username=username, password=password)
     if user is not None:
-        login(request, user)
-        return render(request,'main.html',{'username':username})
+        if user.email_is_verified:
+            login(request, user)
+            return render(request,'main.html',{'username':username})
+        else:
+            return render(request,'login.html',{"msg":"Your email is not verified yet, please check your email."})
     else:
         return render(request, 'login.html',{"msg":"Incorrect Username or Password"})
 
@@ -189,5 +192,5 @@ def activate_user(request,uidb64,token):
         user.save()
         messages.add_message(request,messages.SUCCESS,'Email verified, you can proceed to login')
         return redirect('home')
-    return render(request,'activate-failed.html',{'user',user})
+    return render(request,'activate-failed.html',{'user':user})
 
