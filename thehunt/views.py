@@ -23,7 +23,8 @@ def home(request):
         else:
             return render(request,'login.html',{"msg":"Your email is not verified yet, please check your email."})
     else:
-        return render(request,'login.html',{"msg":""})
+        return render(request,'login.html',{"msg":"Email verified, you can proceed to login"})
+        
 
 def register(request):
 
@@ -183,14 +184,14 @@ def send_email(user, request):
 def activate_user(request,uidb64,token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
-        user = User.objects.get(pk=uid)
+        print(uid)
+        user = Users.objects.get(pk=uid)
     except Exception as e:
         user = None
     
     if user and generate_token.check_token(user,token):
         user.email_is_verified = True
         user.save()
-        messages.add_message(request,messages.SUCCESS,'Email verified, you can proceed to login')
         return redirect('home')
     return render(request,'activate-failed.html',{'user':user})
 
