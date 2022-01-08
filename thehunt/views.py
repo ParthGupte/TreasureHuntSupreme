@@ -184,7 +184,6 @@ def send_email(user, request):
 def activate_user(request,uidb64,token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
-        print(uid)
         user = Users.objects.get(pk=uid)
     except Exception as e:
         user = None
